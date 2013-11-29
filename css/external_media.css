@@ -1,0 +1,87 @@
+/* 
+    Document   : external_media
+    Created on : Oct 15, 2013, 7:40:58 PM
+    Author     : appleuser
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.external_category_main {
+    width: 670px;
+    margin-bottom: 15px;
+}
+
+.external_category_image {
+    display:block;
+    float:left;
+}
+
+.external_category_image img {
+    width: 100px;
+    height: 100px;
+}
+
+.external_category_info {
+    display: block;
+    float: left;
+    position: relative;
+    
+    height: 100px;
+}
+.external_category_title {
+    color:#09A05A;
+    font: bold 22px/1.4em jura,sans-serif; 
+    
+    position: static;
+    display:inline-block;
+    top: 0px;
+    
+    padding-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.external_category_authors {
+    color:#09A05A;
+    font: bold 10pt jura,sans-serif; 
+    padding-left: 5px;
+}
+
+.external_category_messages {
+    margin-top: 13px;
+    width: 90%;
+}
+
+.external_category_message {
+    padding: 8px;
+}
+
+.message_odd {
+    background-color: #64d09f;
+}
+
+.message_even {
+    background-color: #03683a;
+}
+
+.external_message_title {
+    display: inline-block;
+    float:left;
+}
+
+.external_message_title a {
+    color: #292828;
+    font: bold 15px/1.4em arial,helvetica,sans-serif;
+}
+
+.external_message_date {
+    display: inline-block;
+    float:right;
+    
+    color: #292828;
+    font: 15px/1.4em arial,helvetica,sans-serif;
+}
