@@ -57,7 +57,7 @@ class ExternalController extends Controller
 	 */
 	public function loadMedia()
 	{
-            $categories=  Category::model()->findAllByAttributes(array("active"=>1),array(),"order by date");
+            $categories=  Category::model()->findAllByAttributes(array("active"=>1),array('order'=>'date desc'));
             if($categories===null)
                     throw new CHttpException(404,'No media can be found');
             return $categories;

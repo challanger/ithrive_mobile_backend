@@ -23,7 +23,7 @@
         
 	<div class="row">
 		<?php echo $form->labelEx($model,'category'); ?>
-		<?php echo $form->dropDownList($model,'category', CHtml::listData(Category::model()->findAll(array('order'=>'date')),'id','title')); ?>
+		<?php echo $form->dropDownList($model,'category', CHtml::listData(Category::model()->findAllByAttributes(array('active'=>1),array('order'=>'date')),'id','title')); ?>
 		<?php echo $form->error($model,'category'); ?>
 	</div>
 

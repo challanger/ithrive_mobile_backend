@@ -148,6 +148,7 @@ class CategoryController extends Controller
 		$dataProvider=new CActiveDataProvider('Category',array(
                 'criteria'=>array(
                     'condition'=>'active=1',
+                    'order'=>'date desc'
                 )));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
