@@ -55,10 +55,10 @@ class Category extends CActiveRecord
 		return array(
 			array('date, created_by, created, updated_by, updated', 'numerical', 'integerOnly'=>true),
 			array('title, author', 'length', 'max'=>500),
-			array('imageurl','file','types'=>'png,jpg,jpeg,gif','safe'=>false),
+			array('imageurl','file','types'=>'png,jpg,jpeg,gif','safe'=>false,'allowEmpty'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, imageurl, title, author, date, created_by, created, updated_by, updated', 'safe', 'on'=>'search'),
+			array('id, title, author, date, created_by, created, updated_by, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
