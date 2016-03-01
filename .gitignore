@@ -1,2 +1,8 @@
 
 *.log
+
+protected/runtime/application.log
+
+protected/config/main.php
+
+protected/config/main.php
