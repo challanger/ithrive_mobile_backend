@@ -91,7 +91,7 @@ class MessageController extends Controller
 			{
 				if(!is_null($tempSave))
 					$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
-				//$this->redirect(array('category/index'));
+				$this->redirect(array('category/index'));
 			}
 		}
 
