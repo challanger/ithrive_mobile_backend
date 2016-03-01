@@ -72,8 +72,11 @@ class CategoryController extends Controller
 		{
 			$model->attributes=$_POST['Category'];
 			$tempSave=CUploadedFile::getInstance($model,'imageurl');
-			$filePath = Yii::app()->params['mediaImagePath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
-			$model->imageurl = $filePath;
+			if(!is_null($tempSave))
+			{
+				$filePath = Yii::app()->params['mediaImagePath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
+				$model->imageurl = $filePath;
+			}
 
       $date_parts=explode("/",$_POST['date_save']);
       if(count($date_parts)==3)
@@ -85,7 +88,8 @@ class CategoryController extends Controller
 
 			if($model->save())
 			{
-				$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
+				if(!is_null($tempSave))
+					$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
 				$this->redirect(array('index'));
 			}
 		}
@@ -111,8 +115,11 @@ class CategoryController extends Controller
 		{
 			$model->attributes=$_POST['Category'];
 			$tempSave=CUploadedFile::getInstance($model,'imageurl');
-			$filePath = Yii::app()->params['mediaImagePath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
-			$model->imageurl = $filePath;
+			if(!is_null($tempSave))
+			{
+				$filePath = Yii::app()->params['mediaImagePath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
+				$model->imageurl = $filePath;
+			}
 
       $date_parts=explode("/",$_POST['date_save']);
       if(count($date_parts)==3)
@@ -124,7 +131,8 @@ class CategoryController extends Controller
 
 			if($model->save())
 			{
-				$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
+				if(!is_null($tempSave))
+					$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
 				$this->redirect(array('index'));
 			}
 
