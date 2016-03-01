@@ -30,7 +30,7 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Slides', 'url'=>array('/slides/'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Slides', 'url'=>array('/slides/'), 'visible'=>Yii::app()->user->has_permission('admin')),
 				array('label'=>'Messages', 'url'=>array('/category/'), 'visible'=>!Yii::app()->user->isGuest),
                                 array('label'=>'Users', 'url'=>array('/users/'), 'visible'=>Yii::app()->user->has_permission('admin')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

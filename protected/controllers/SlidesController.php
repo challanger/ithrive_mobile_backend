@@ -31,9 +31,13 @@ class SlidesController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			/*array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('index','create','update','delete'),
 				'users'=>array('@'),
+			),*/
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('index','create','update','delete'),
+				'users'=>array('admin'),
 			),
 			/*array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array(,'admin','delete'),
@@ -71,23 +75,23 @@ class SlidesController extends Controller
 		if(isset($_POST['Slides']))
 		{
 			$model->attributes=$_POST['Slides'];
-                        
+
                         $start_parts=explode("/",$_POST['starts_save']);
                         if(count($start_parts)==3)
                         {
                             $model->starts=  mktime(1, 1, 1, $start_parts[0], $start_parts[1], $start_parts[2]);
                         }
-                        else 
+                        else
                             $model->starts=0;
-                        
+
                         $expires_parts=explode("/",$_POST['expires_save']);
                         if(count($expires_parts)==3)
                         {
                             $model->expires=  mktime(1, 1, 1, $expires_parts[0], $expires_parts[1], $expires_parts[2]);
                         }
-                        else 
+                        else
                             $model->expires=0;
-                        
+
 			if($model->save())
 				$this->redirect(array('index'));
 		}
@@ -112,23 +116,23 @@ class SlidesController extends Controller
 		if(isset($_POST['Slides']))
 		{
 			$model->attributes=$_POST['Slides'];
-                        //deal with the start date 
+                        //deal with the start date
                         $start_parts=explode("/",$_POST['starts_save']);
                         if(count($start_parts)==3)
                         {
                             $model->starts=  mktime(1, 1, 1, $start_parts[0], $start_parts[1], $start_parts[2]);
                         }
-                        else 
+                        else
                             $model->starts=0;
-                        
+
                         $expires_parts=explode("/",$_POST['expires_save']);
                         if(count($expires_parts)==3)
                         {
                             $model->expires=  mktime(1, 1, 1, $expires_parts[0], $expires_parts[1], $expires_parts[2]);
                         }
-                        else 
+                        else
                             $model->expires=0;
-                        
+
 			if($model->save())
 				$this->redirect(array('index'));
 		}
@@ -148,7 +152,7 @@ class SlidesController extends Controller
                 $resource=$this->loadModel($id);
                 $resource->active=0;
                 $resource->save();
-                
+
 		//$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
