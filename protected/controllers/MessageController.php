@@ -71,17 +71,28 @@ class MessageController extends Controller
 		if(isset($_POST['Message']))
 		{
 			$model->attributes=$_POST['Message'];
-                        
-                        $date_parts=explode("/",$_POST['date_save']);
-                        if(count($date_parts)==3)
-                        {
-                            $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
-                        }
-                        else 
-                            $model->date=0;
-                        
+
+			$tempSave=CUploadedFile::getInstance($model,'url');
+			if(!is_null($tempSave))
+			{
+				$filePath = Yii::app()->params['mediaAudoPath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
+				$model->url = $filePath;
+			}
+
+      $date_parts=explode("/",$_POST['date_save']);
+      if(count($date_parts)==3)
+      {
+          $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
+      }
+      else
+          $model->date=0;
+
 			if($model->save())
-				$this->redirect(array('category/index'));
+			{
+				if(!is_null($tempSave))
+					$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
+				//$this->redirect(array('category/index'));
+			}
 		}
 
 		$this->render('create',array(
@@ -97,24 +108,35 @@ class MessageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Message']))
 		{
 			$model->attributes=$_POST['Message'];
-                        
-                        $date_parts=explode("/",$_POST['date_save']);
-                        if(count($date_parts)==3)
-                        {
-                            $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
-                        }
-                        else 
-                            $model->date=0;
-                        
+
+			$tempSave=CUploadedFile::getInstance($model,'url');
+			if(!is_null($tempSave))
+			{
+				$filePath = Yii::app()->params['mediaAudoPath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
+				$model->url = $filePath;
+			}
+
+
+      $date_parts=explode("/",$_POST['date_save']);
+      if(count($date_parts)==3)
+      {
+          $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
+      }
+      else
+          $model->date=0;
+
 			if($model->save())
+			{
+				if(!is_null($tempSave))
+					$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
 				$this->redirect(array('category/index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -132,7 +154,7 @@ class MessageController extends Controller
                 $resource=$this->loadModel($id);
                 $resource->active=0;
                 $resource->save();
-                
+
 		//$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

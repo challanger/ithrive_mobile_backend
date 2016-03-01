@@ -39,8 +39,8 @@ class Message extends CActiveRecord
 	{
 		return 'itm_message';
 	}
-        
-        public function init() 
+
+        public function init()
         {
             $this->date=time();
         }
@@ -54,7 +54,8 @@ class Message extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('category, date, created_by, created, updated_by, updated', 'numerical', 'integerOnly'=>true),
-			array('url, title', 'length', 'max'=>500),
+			array('title', 'length', 'max'=>500),
+			array('url','file','types'=>'mp3','safe'=>false,'allowEmpty'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, category, url, title, date, created_by, created, updated_by, updated', 'safe', 'on'=>'search'),
@@ -118,12 +119,12 @@ class Message extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-        
-        public function getDate() 
+
+        public function getDate()
         {
             return date("m/d/y",$this->date);
         }
-        
+
         public function beforeSave()
         {
             if($this->isNewRecord)
@@ -131,10 +132,10 @@ class Message extends CActiveRecord
                 $this->created=time();
                 $this->created_by=Yii::app()->user->getID();
             }
-            
+
             $this->updated=time();
             $this->updated_by=Yii::app()->user->getID();
-            
+
             return parent::beforeSave();
         }
 }

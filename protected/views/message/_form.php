@@ -9,6 +9,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'message-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -20,7 +21,7 @@
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>500)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
-        
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'category'); ?>
 		<?php echo $form->dropDownList($model,'category', CHtml::listData(Category::model()->findAllByAttributes(array('active'=>1),array('order'=>'date')),'id','title')); ?>
@@ -29,7 +30,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'url'); ?>
-		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>500)); ?>
+		<?php echo $form->fileField($model,'url'); ?>
 		<?php echo $form->error($model,'url'); ?>
 	</div>
 
