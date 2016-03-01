@@ -9,6 +9,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'category-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -20,16 +21,16 @@
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>500)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
-        
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'author'); ?>
 		<?php echo $form->textField($model,'author',array('size'=>60,'maxlength'=>500)); ?>
 		<?php echo $form->error($model,'author'); ?>
 	</div>
-        
+
         <div class="row">
 		<?php echo $form->labelEx($model,'imageurl'); ?>
-		<?php echo $form->textField($model,'imageurl',array('size'=>60,'maxlength'=>500)); ?>
+		<?php echo $form->fileField($model,'imageurl'); ?>
 		<?php echo $form->error($model,'imageurl'); ?>
 	</div>
 

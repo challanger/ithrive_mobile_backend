@@ -71,15 +71,15 @@ class CategoryController extends Controller
 		if(isset($_POST['Category']))
 		{
 			$model->attributes=$_POST['Category'];
-                        
+
                         $date_parts=explode("/",$_POST['date_save']);
                         if(count($date_parts)==3)
                         {
                             $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
                         }
-                        else 
+                        else
                             $model->date=0;
-                        
+
 			if($model->save())
 				$this->redirect(array('index'));
 		}
@@ -104,17 +104,25 @@ class CategoryController extends Controller
 		if(isset($_POST['Category']))
 		{
 			$model->attributes=$_POST['Category'];
-                        
-                        $date_parts=explode("/",$_POST['date_save']);
-                        if(count($date_parts)==3)
-                        {
-                            $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
-                        }
-                        else 
-                            $model->date=0;
-                        
+			$tempSave=CUploadedFile::getInstance($model,'imageurl');
+			$filePath = Yii::app()->params['mediaImagePath'] . $model->id."-".time().'.'. $tempSave->getExtensionName();
+			$model->imageurl = $filePath;
+
+      $date_parts=explode("/",$_POST['date_save']);
+      if(count($date_parts)==3)
+      {
+          $model->date=  mktime(1, 1, 1, $date_parts[0], $date_parts[1], $date_parts[2]);
+      }
+      else
+          $model->date=0;
+
 			if($model->save())
+			{
+				$tempSave->saveAs(Yii::app()->params['webRoot'].$filePath);
+				//$tempSave->saveAs(Yii::app()->params['mediaImagePath']."/category-image"$model->id.".png");//.$tempSave->getName());
 				$this->redirect(array('index'));
+			}
+
 		}
 
 		$this->render('update',array(
@@ -132,7 +140,7 @@ class CategoryController extends Controller
                 $resource=$this->loadModel($id);
                 $resource->active=0;
                 $resource->save();
-                        
+
 		//$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

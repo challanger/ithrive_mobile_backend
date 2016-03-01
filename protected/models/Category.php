@@ -39,8 +39,8 @@ class Category extends CActiveRecord
 	{
 		return 'itm_category';
 	}
-        
-        public function init() 
+
+        public function init()
         {
             $this->date=time();
         }
@@ -54,7 +54,8 @@ class Category extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('date, created_by, created, updated_by, updated', 'numerical', 'integerOnly'=>true),
-			array('imageurl, title, author', 'length', 'max'=>500),
+			array('title, author', 'length', 'max'=>500),
+			array('imageurl','file','types'=>'png,jpg,jpeg,gif','safe'=>false),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, imageurl, title, author, date, created_by, created, updated_by, updated', 'safe', 'on'=>'search'),
@@ -118,12 +119,12 @@ class Category extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-        
-        public function getDate() 
+
+        public function getDate()
         {
             return date("m/d/y",$this->date);
         }
-        
+
         public function beforeSave()
         {
             if($this->isNewRecord)
@@ -131,10 +132,10 @@ class Category extends CActiveRecord
                 $this->created=time();
                 $this->created_by=Yii::app()->user->getID();
             }
-            
+
             $this->updated=time();
             $this->updated_by=Yii::app()->user->getID();
-            
+
             return parent::beforeSave();
         }
 }
